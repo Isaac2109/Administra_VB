@@ -1,8 +1,8 @@
 VERSION 5.00
-Begin VB.MDIForm frmMDIPrincipall 
+Begin VB.MDIForm frmMDIPrincipal 
    Appearance      =   0  'Flat
    BackColor       =   &H8000000C&
-   Caption         =   "MDIForm"
+   Caption         =   "Administra"
    ClientHeight    =   8730
    ClientLeft      =   120
    ClientTop       =   765
@@ -18,19 +18,28 @@ Begin VB.MDIForm frmMDIPrincipall
       Begin VB.Menu cadastroFornecedores 
          Caption         =   "&Fornecedores"
       End
+      Begin VB.Menu cadastroPrestadores 
+         Caption         =   "&Prestadores"
+      End
+      Begin VB.Menu cadastroProdutos 
+         Caption         =   "&Produtos"
+      End
    End
 End
-Attribute VB_Name = "frmMDIPrincipall"
+Attribute VB_Name = "frmMDIPrincipal"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Private Sub MDIForm_Load()
+Private Sub cadastroClientes_Click()
 
-    'Conexao com Banco de Dados
-    cnnBD.ConnectionString = "Provider=SQLOLEDB;Data Source=ISAAC-PC\SQLEXPRESS,1433;Initial Catalog=Administra_VB;Password=Lrsiazevedo2023@;User ID=sa;"
-    cnnBD.Open
-    
-    MsgBox " Conexão efetuada com sucesso. Seja Bem Vindo!! "
+    frmCadastroClientes.Show
 
 End Sub
+
+Private Sub cadastroProdutos_Click()
+
+    FrmCadastroProdutos.Show
+
+End Sub
+

@@ -1,1 +1,5 @@
-MDIForm1 = 0, 0, 0, 0, C, 52, 52, 939, 486, C
+frmMDIPrincipal = 156, 156, 1043, 590, Z, 52, 52, 939, 486, C
+Modulo = 78, 78, 965, 512, 
+frmCadastroProdutos = 52, 52, 939, 486, , 78, 78, 965, 512, C
+frmCadastroClientes = 130, 130, 1017, 564, , 78, 78, 965, 512, C
+frmLogin = 0, 0, 0, 0, C, 26, 26, 913, 460, C
