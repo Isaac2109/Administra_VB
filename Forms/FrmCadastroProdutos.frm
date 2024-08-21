@@ -1,19 +1,18 @@
 VERSION 5.00
-Begin VB.Form frmCadastroProdutos 
+Begin VB.Form FrmCadastroProdutos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Cadastro de Produtos"
-   ClientHeight    =   3345
+   ClientHeight    =   2670
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   8265
+   ClientWidth     =   7965
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   3345
-   ScaleWidth      =   8265
+   ScaleHeight     =   2670
+   ScaleWidth      =   7965
    Begin VB.TextBox Text1 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -26,11 +25,10 @@ Begin VB.Form frmCadastroProdutos
       Height          =   360
       Left            =   3480
       TabIndex        =   15
-      Top             =   2400
-      Width           =   4455
+      Top             =   2160
+      Width           =   4215
    End
    Begin VB.TextBox txtPrecoSaida 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -43,11 +41,10 @@ Begin VB.Form frmCadastroProdutos
       Height          =   360
       Left            =   1800
       TabIndex        =   13
-      Top             =   2400
+      Top             =   2160
       Width           =   1455
    End
    Begin VB.TextBox txtPrecoEntrada 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -60,11 +57,10 @@ Begin VB.Form frmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   11
-      Top             =   2400
+      Top             =   2160
       Width           =   1455
    End
    Begin VB.TextBox txtNomeGrupo 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -75,13 +71,12 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   5040
+      Left            =   4800
       TabIndex        =   9
-      Top             =   1560
+      Top             =   1320
       Width           =   2895
    End
    Begin VB.TextBox txtCodigoGrupo 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -92,13 +87,12 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   4200
+      Left            =   4080
       TabIndex        =   8
-      Top             =   1560
+      Top             =   1320
       Width           =   735
    End
    Begin VB.TextBox txtNomeMarca 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -109,13 +103,12 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   1080
+      Left            =   960
       TabIndex        =   6
-      Top             =   1560
+      Top             =   1320
       Width           =   2895
    End
    Begin VB.TextBox txtCodigoMarca 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -128,11 +121,10 @@ Begin VB.Form frmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   5
-      Top             =   1560
+      Top             =   1320
       Width           =   735
    End
    Begin VB.TextBox txtNomeProduto 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -143,13 +135,12 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   360
-      Left            =   1680
+      Left            =   1560
       TabIndex        =   3
-      Top             =   720
-      Width           =   6255
+      Top             =   480
+      Width           =   6135
    End
    Begin VB.TextBox txtCodProduto 
-      Appearance      =   0  'Flat
       BeginProperty Font 
          Name            =   "MS Sans Serif"
          Size            =   9.75
@@ -162,7 +153,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   1
-      Top             =   720
+      Top             =   480
       Width           =   1215
    End
    Begin VB.Label Label1 
@@ -179,7 +170,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   255
       Left            =   3480
       TabIndex        =   14
-      Top             =   2160
+      Top             =   1920
       Width           =   1455
    End
    Begin VB.Label lblPrecoSaida 
@@ -196,7 +187,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   255
       Left            =   1800
       TabIndex        =   12
-      Top             =   2160
+      Top             =   1920
       Width           =   1455
    End
    Begin VB.Label lblPrecoEntrada 
@@ -213,7 +204,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   10
-      Top             =   2160
+      Top             =   1920
       Width           =   1455
    End
    Begin VB.Label lblGrupo 
@@ -228,9 +219,9 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   255
-      Left            =   4200
+      Left            =   4080
       TabIndex        =   7
-      Top             =   1320
+      Top             =   1080
       Width           =   735
    End
    Begin VB.Label lblMarca 
@@ -247,7 +238,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   4
-      Top             =   1320
+      Top             =   1080
       Width           =   735
    End
    Begin VB.Label lblNomeProduto 
@@ -262,9 +253,9 @@ Begin VB.Form frmCadastroProdutos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   255
-      Left            =   1680
+      Left            =   1560
       TabIndex        =   2
-      Top             =   480
+      Top             =   240
       Width           =   615
    End
    Begin VB.Label lblCodigoProduto 
@@ -281,7 +272,7 @@ Begin VB.Form frmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   0
-      Top             =   480
+      Top             =   240
       Width           =   735
    End
 End
