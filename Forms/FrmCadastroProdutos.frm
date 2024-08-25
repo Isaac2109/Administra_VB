@@ -2,16 +2,16 @@ VERSION 5.00
 Begin VB.Form FrmCadastroProdutos 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Cadastro de Produtos"
-   ClientHeight    =   2670
+   ClientHeight    =   2310
    ClientLeft      =   45
    ClientTop       =   390
-   ClientWidth     =   7965
+   ClientWidth     =   7950
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   2670
-   ScaleWidth      =   7965
+   ScaleHeight     =   2310
+   ScaleWidth      =   7950
    Begin VB.TextBox Text1 
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -25,7 +25,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   3480
       TabIndex        =   15
-      Top             =   2160
+      Top             =   1800
       Width           =   4215
    End
    Begin VB.TextBox txtPrecoSaida 
@@ -41,7 +41,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   1800
       TabIndex        =   13
-      Top             =   2160
+      Top             =   1800
       Width           =   1455
    End
    Begin VB.TextBox txtPrecoEntrada 
@@ -57,7 +57,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   11
-      Top             =   2160
+      Top             =   1800
       Width           =   1455
    End
    Begin VB.TextBox txtNomeGrupo 
@@ -73,7 +73,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   4800
       TabIndex        =   9
-      Top             =   1320
+      Top             =   1080
       Width           =   2895
    End
    Begin VB.TextBox txtCodigoGrupo 
@@ -89,7 +89,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   4080
       TabIndex        =   8
-      Top             =   1320
+      Top             =   1080
       Width           =   735
    End
    Begin VB.TextBox txtNomeMarca 
@@ -105,7 +105,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   960
       TabIndex        =   6
-      Top             =   1320
+      Top             =   1080
       Width           =   2895
    End
    Begin VB.TextBox txtCodigoMarca 
@@ -121,7 +121,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   5
-      Top             =   1320
+      Top             =   1080
       Width           =   735
    End
    Begin VB.TextBox txtNomeProduto 
@@ -137,7 +137,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   1560
       TabIndex        =   3
-      Top             =   480
+      Top             =   360
       Width           =   6135
    End
    Begin VB.TextBox txtCodProduto 
@@ -153,7 +153,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   1
-      Top             =   480
+      Top             =   360
       Width           =   1215
    End
    Begin VB.Label Label1 
@@ -170,7 +170,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   3480
       TabIndex        =   14
-      Top             =   1920
+      Top             =   1560
       Width           =   1455
    End
    Begin VB.Label lblPrecoSaida 
@@ -187,7 +187,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   1800
       TabIndex        =   12
-      Top             =   1920
+      Top             =   1560
       Width           =   1455
    End
    Begin VB.Label lblPrecoEntrada 
@@ -204,7 +204,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   10
-      Top             =   1920
+      Top             =   1560
       Width           =   1455
    End
    Begin VB.Label lblGrupo 
@@ -221,7 +221,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   4080
       TabIndex        =   7
-      Top             =   1080
+      Top             =   840
       Width           =   735
    End
    Begin VB.Label lblMarca 
@@ -238,7 +238,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   4
-      Top             =   1080
+      Top             =   840
       Width           =   735
    End
    Begin VB.Label lblNomeProduto 
@@ -255,7 +255,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   1560
       TabIndex        =   2
-      Top             =   240
+      Top             =   120
       Width           =   615
    End
    Begin VB.Label lblCodigoProduto 
@@ -272,7 +272,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   255
       Left            =   240
       TabIndex        =   0
-      Top             =   240
+      Top             =   120
       Width           =   735
    End
 End

@@ -28,7 +28,7 @@ On Error GoTo Trataerro
     Exit Function
     
 Trataerro:
-    MsgBox "Conexão Com Banco De Dados não foi realizada corretamente!     Por Favor Verifique seu Banco De Dados", vbOKOnly, "Erro com Banco De Dados"
+    MsgBox "Conexão Com Banco De Dados não foi realizada corretamente!            Por Favor Verifique seu Banco De Dados.", vbOKOnly, "Erro com Banco De Dados"
     End
     
 End Function

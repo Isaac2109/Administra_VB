@@ -25,7 +25,7 @@ Begin VB.Form frmLogin
       Caption         =   "Alterar Senha"
       Height          =   435
       Left            =   7440
-      TabIndex        =   8
+      TabIndex        =   5
       Top             =   1800
       Width           =   855
    End
@@ -33,7 +33,7 @@ Begin VB.Form frmLogin
       Caption         =   "Cancelar"
       Height          =   435
       Left            =   6480
-      TabIndex        =   7
+      TabIndex        =   4
       Top             =   1800
       Width           =   975
    End
@@ -41,7 +41,7 @@ Begin VB.Form frmLogin
       Caption         =   "Ok"
       Height          =   435
       Left            =   5520
-      TabIndex        =   6
+      TabIndex        =   3
       Top             =   1800
       Width           =   975
    End
@@ -66,7 +66,7 @@ Begin VB.Form frmLogin
       Picture         =   "frmLogin.frx":0000
       ScaleHeight     =   1575
       ScaleWidth      =   4500
-      TabIndex        =   4
+      TabIndex        =   7
       Top             =   120
       Width           =   4500
    End
@@ -82,7 +82,7 @@ Begin VB.Form frmLogin
       EndProperty
       Height          =   375
       Left            =   4800
-      TabIndex        =   3
+      TabIndex        =   2
       Top             =   1320
       Width           =   3495
    End
@@ -115,7 +115,7 @@ Begin VB.Form frmLogin
       EndProperty
       Height          =   255
       Left            =   120
-      TabIndex        =   5
+      TabIndex        =   8
       Top             =   1920
       Width           =   5175
    End
@@ -132,7 +132,7 @@ Begin VB.Form frmLogin
       EndProperty
       Height          =   255
       Left            =   4800
-      TabIndex        =   2
+      TabIndex        =   6
       Top             =   1080
       Width           =   735
    End
@@ -159,6 +159,22 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+'---------------------------Key Press
+Private Sub txtSenha_KeyPress(KeyAscii As Integer)
+
+    If KeyAscii = 13 Then
+        btnEntrar_Click
+    End If
+
+End Sub
+
+Private Sub txtUsuario_KeyPress(KeyAscii As Integer)
+    
+    If KeyAscii = 13 Then
+        txtSenha.SetFocus
+    End If
+    
+End Sub
 
 Private Sub btnCancelar_Click()
 
@@ -182,6 +198,7 @@ Private Sub btnEntrar_Click()
     
     If rsUsuario.EOF = True Then
         MsgBox "Usuario ou Senha Incorreta!", vbOKOnly, "Atenção!"
+        txtSenha.SetFocus
     Else
         Unload Me
         frmMDIPrincipal.Show
