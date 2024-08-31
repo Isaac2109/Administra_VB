@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin VB.MDIForm frmMDIPrincipal 
    Appearance      =   0  'Flat
-   BackColor       =   &H8000000C&
+   BackColor       =   &H00FFFFC0&
    Caption         =   "Administra"
    ClientHeight    =   8730
    ClientLeft      =   120
@@ -34,6 +34,18 @@ Attribute VB_Exposed = False
 Private Sub cadastroClientes_Click()
 
     frmCadastroClientes.Show
+
+End Sub
+
+Private Sub cadastroFornecedores_Click()
+
+    frmCadastroFornecedores.Show
+
+End Sub
+
+Private Sub cadastroPrestadores_Click()
+
+    frmCadastroPrestadores.Show
 
 End Sub
 

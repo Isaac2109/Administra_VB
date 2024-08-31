@@ -1,7 +1,7 @@
 VERSION 5.00
-Begin VB.Form frmCadastroClientes 
+Begin VB.Form frmCadastroPrestadores 
    BorderStyle     =   1  'Fixed Single
-   Caption         =   "Cadastro de Clientes"
+   Caption         =   "Cadastro De Prestadores"
    ClientHeight    =   2295
    ClientLeft      =   45
    ClientTop       =   390
@@ -43,19 +43,10 @@ Begin VB.Form frmCadastroClientes
       Width           =   1455
    End
    Begin VB.ComboBox cbmPessoa 
-      BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   360
-      ItemData        =   "frmCadastroClientes.frx":0000
+      ItemData        =   "frmCadastroPrestadores.frx":0000
       Left            =   7800
-      List            =   "frmCadastroClientes.frx":000A
+      List            =   "frmCadastroPrestadores.frx":000A
       TabIndex        =   2
       Top             =   360
       Width           =   1095
@@ -198,7 +189,7 @@ Begin VB.Form frmCadastroClientes
       Width           =   735
    End
 End
-Attribute VB_Name = "frmCadastroClientes"
+Attribute VB_Name = "frmCadastroPrestadores"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -210,4 +201,5 @@ Private Sub Form_Load()
     Me.Top = (frmMDIPrincipal.ScaleHeight - Me.Height) \ 2
     
 End Sub
+
 

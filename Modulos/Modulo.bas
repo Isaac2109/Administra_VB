@@ -1,6 +1,6 @@
 Attribute VB_Name = "Modulo"
 Public ConexaoBD As New Connection
-Public StringConexao As String
+Dim StringConexao As String
 
 Sub Main()
 
@@ -32,3 +32,18 @@ Trataerro:
     End
     
 End Function
+
+Public Function VazioToNull(ByVal value As String) As Variant
+
+    If value = "" Then
+        VazioToNull = Null
+    Else
+        VazioToNull = value
+    End If
+
+End Function
+
+
+
+
+

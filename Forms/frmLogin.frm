@@ -81,7 +81,9 @@ Begin VB.Form frmLogin
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
+      IMEMode         =   3  'DISABLE
       Left            =   4800
+      PasswordChar    =   "*"
       TabIndex        =   2
       Top             =   1320
       Width           =   3495
