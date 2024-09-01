@@ -187,16 +187,16 @@ End Sub
 Private Sub btnEntrar_Click()
 
     Dim rsUsuario As New Recordset
-    Dim Query As String
+    Dim query As String
     Dim Login As String
     Dim Senha As String
     
     Login = txtUsuario
     Senha = txtSenha
     
-    Query = "Select * from Usuarios Where Login = '" & Login & "' and Senha = '" & Senha & "'"
+    query = "Select * from Usuarios Where Login = '" & Login & "' and Senha = '" & Senha & "'"
     
-    rsUsuario.Open Query, ConexaoBD, adOpenForwardOnly, adLockOptimistic
+    rsUsuario.Open query, ConexaoBD, adOpenForwardOnly, adLockOptimistic
     
     If rsUsuario.EOF = True Then
         MsgBox "Usuario ou Senha Incorreta!", vbOKOnly, "Atenção!"

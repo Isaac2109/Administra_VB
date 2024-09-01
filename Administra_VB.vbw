@@ -1,7 +1,8 @@
-frmMDIPrincipal = 156, 156, 1043, 590, C, 52, 52, 939, 486, C
+frmMDIPrincipal = 156, 156, 1043, 590, , 52, 52, 939, 486, C
 Modulo = 78, 78, 965, 512, C
 FrmCadastroProdutos = 52, 52, 939, 486, Z, 78, 78, 965, 512, C
 frmCadastroClientes = 130, 130, 1017, 564, C, 78, 78, 965, 512, C
 frmLogin = 78, 78, 965, 512, C, 26, 26, 913, 460, C
 frmCadastroFornecedores = 208, 208, 1095, 642, C, 156, 156, 1043, 590, C
-frmCadastroPrestadores = 0, 0, 887, 434, C, 52, 52, 939, 486, C
+frmCadastroPrestadores = 0, 0, 887, 434, , 52, 52, 939, 486, C
+frmPesquisar = 208, 208, 1080, 642, I, 52, 52, 924, 486, C

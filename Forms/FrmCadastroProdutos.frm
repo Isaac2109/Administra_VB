@@ -46,7 +46,7 @@ Begin VB.Form FrmCadastroProdutos
       Top             =   2160
       Width           =   1095
    End
-   Begin VB.CommandButton Command1 
+   Begin VB.CommandButton btnBuscarGrupo 
       Height          =   375
       Left            =   7080
       TabIndex        =   8
@@ -260,7 +260,7 @@ Begin VB.Form FrmCadastroProdutos
       Top             =   480
       Width           =   855
    End
-   Begin VB.Label Label1 
+   Begin VB.Label lblObservacoes 
       Caption         =   "Observações:"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -409,11 +409,13 @@ Private Sub Form_Load()
     
     rsProdutos.Close
     rsProdutosAberto = False
-
+    
 End Sub
 
 Private Sub btnAlterar_Click()
+
     inclusao = False
+        
 End Sub
 
 Private Sub btnGravar_Click()
@@ -565,4 +567,24 @@ Private Sub txtPrecoSaida_Change()
 
 End Sub
 
+Private Sub btnBuscarMarca_Click()
 
+    frmPesquisar.TabelaBD = "Marcas"
+    frmPesquisar.ColunaBD = "Nome"
+    frmPesquisar.Form = "CadastroProdutos"
+    frmPesquisar.PreencherCampo = "Marca"
+    
+    frmPesquisar.Show
+
+End Sub
+
+Private Sub btnBuscarGrupo_Click()
+
+    frmPesquisar.TabelaBD = "Grupos"
+    frmPesquisar.ColunaBD = "Nome"
+    frmPesquisar.Form = "CadastroProdutos"
+    frmPesquisar.PreencherCampo = "Grupo"
+    
+    frmPesquisar.Show
+
+End Sub
