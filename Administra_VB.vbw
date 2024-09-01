@@ -1,5 +1,5 @@
-frmMDIPrincipal = 156, 156, 1043, 590, , 52, 52, 939, 486, C
-Modulo = 78, 78, 965, 512, 
+frmMDIPrincipal = 156, 156, 1043, 590, C, 52, 52, 939, 486, C
+Modulo = 78, 78, 965, 512, C
 FrmCadastroProdutos = 52, 52, 939, 486, Z, 78, 78, 965, 512, C
 frmCadastroClientes = 130, 130, 1017, 564, C, 78, 78, 965, 512, C
 frmLogin = 78, 78, 965, 512, C, 26, 26, 913, 460, C

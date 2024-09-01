@@ -107,6 +107,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   1800
       TabIndex        =   10
+      Text            =   "0,00"
       Top             =   2160
       Width           =   1455
    End
@@ -123,6 +124,7 @@ Begin VB.Form FrmCadastroProdutos
       Height          =   360
       Left            =   240
       TabIndex        =   9
+      Text            =   "0,00"
       Top             =   2160
       Width           =   1455
    End
@@ -385,6 +387,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim inclusao As Boolean
 Dim rsProdutos As New Recordset
+Dim rsMarca As New Recordset
+Dim rsGrupo As New Recordset
 Dim rsProdutosAberto As Boolean
 
 Private Sub Form_Load()
@@ -392,19 +396,20 @@ Private Sub Form_Load()
     Me.Left = (frmMDIPrincipal.ScaleWidth - Me.Width) \ 2
     Me.Top = (frmMDIPrincipal.ScaleHeight - Me.Height) \ 2
     
+    'Setar Tipo como Inclusão ao carregar Form
     inclusao = True
-    rsProdutosAberto = False
     
+    'Setar Próximo Código do Novo Produto
     rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
     rsProdutosAberto = True
     
     rsProdutos.MoveLast
-    
     txtCodProduto = rsProdutos("Codigo") + 1
     txtEstoque = 0
     
     rsProdutos.Close
     rsProdutosAberto = False
+
 End Sub
 
 Private Sub btnAlterar_Click()
@@ -414,9 +419,13 @@ End Sub
 Private Sub btnGravar_Click()
     If gravarDados = True Then
         limparDados
+    Else
+        rsProdutos.Close
+        rsProdutosAberto = False
     End If
 End Sub
 
+'Gravar RecordSet
 Private Function gravarDados() As Boolean
 On Error GoTo Trataerro
 
@@ -453,7 +462,7 @@ Trataerro:
     gravarDados = False
 End Function
 
-
+'Limpar dados dos txtBox
 Private Sub limparDados()
     txtCodProduto = txtCodProduto + 1
     txtNomeProduto.Text = Empty
@@ -461,14 +470,99 @@ Private Sub limparDados()
     txtCodMarca.Text = Empty
     txtCodGrupo.Text = Empty
     txtPrecoEntrada.Text = Empty
-    txtEstoque.Text = 0
+    txtEstoque = 0
     txtPrecoSaida.Text = Empty
     txtObservacoes.Text = Empty
 End Sub
 
+'Busca Grupo Pelo Codigo
+Private Sub txtCodGrupo_LostFocus()
 
+    If txtCodGrupo <> "" And IsNumeric(txtCodGrupo) Then
+    
+        rsGrupo.Open "SELECT * FROM Grupos WHERE Codigo = " & txtCodGrupo, ConexaoBD, adOpenForwardOnly, adLockOptimistic
+        
+        If rsGrupo.EOF <> True Then
+            txtNomeGrupo = rsGrupo("Nome")
+        Else
+            txtNomeGrupo = ""
+        End If
+        
+        rsGrupo.Close
+    End If
 
+End Sub
 
+'Busca Marca Pelo Codigo
+Private Sub txtCodMarca_LostFocus()
 
+    If txtCodMarca <> "" And IsNumeric(txtCodMarca) Then
+        
+        rsMarca.Open "SELECT * FROM Marcas WHERE Codigo = " & txtCodMarca, ConexaoBD, adOpenForwardOnly, adLockOptimistic
+        
+        If rsMarca.EOF <> True Then
+            txtNomeMarca = rsMarca("Nome")
+        Else
+            txtNomeMarca = ""
+        End If
+        
+        rsMarca.Close
+    End If
+
+End Sub
+
+'FORMATAÇÃO DE VALOR
+Private Sub txtPrecoEntrada_Change()
+    Dim valor As String
+    Dim pos As Integer
+    
+    'remove formatação prévia
+    valor = Replace(txtPrecoEntrada, ",", "")
+    valor = Replace(valor, ".", "")
+    
+    If IsNumeric(valor) Then
+        
+        'Convert o valor para duas casas decimais
+        valor = Format(Val(valor) / 100, "#,##0.00")
+        
+        'Preserva a posição do cursor
+        pos = Len(txtPrecoEntrada) - txtPrecoEntrada.SelStart
+        txtPrecoEntrada = valor
+        txtPrecoEntrada.SelStart = Len(txtPrecoEntrada) - pos
+        
+    ElseIf valor <> "" Then
+        'Caso Digite um valor não Numérico
+        MsgBox "Digite apenas números.", vbExclamation
+        txtPrecoEntrada = "0,00"
+    End If
+
+End Sub
+
+'FORMATAÇÃO DE VALOR
+Private Sub txtPrecoSaida_Change()
+    Dim valor As String
+    Dim pos As Integer
+    
+    'remove formatação prévia
+    valor = Replace(txtPrecoSaida, ",", "")
+    valor = Replace(valor, ".", "")
+    
+    If IsNumeric(valor) Then
+        
+        'Convert o valor para duas casas decimais
+        valor = Format(Val(valor) / 100, "#,##0.00")
+        
+        'Preserva a posição do cursor
+        pos = Len(txtPrecoSaida) - txtPrecoSaida.SelStart
+        txtPrecoSaida = valor
+        txtPrecoSaida.SelStart = Len(txtPrecoSaida) - pos
+        
+    ElseIf valor <> "" Then
+        'Caso Digite um valor não Numérico
+        MsgBox "Digite apenas números.", vbExclamation
+        txtPrecoSaida = "0,00"
+    End If
+
+End Sub
 
 
