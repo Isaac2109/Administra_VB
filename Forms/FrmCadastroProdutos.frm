@@ -12,10 +12,64 @@ Begin VB.Form FrmCadastroProdutos
    MinButton       =   0   'False
    ScaleHeight     =   2715
    ScaleWidth      =   7950
-   Begin VB.CommandButton btnGravar 
-      Caption         =   "V"
+   Begin VB.CommandButton btnNovo 
+      Caption         =   "N"
+      Enabled         =   0   'False
+      Height          =   375
+      Left            =   4920
+      TabIndex        =   29
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnInicio 
+      Caption         =   "<<"
+      Enabled         =   0   'False
+      Height          =   375
+      Left            =   5280
+      TabIndex        =   28
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnAnterior 
+      Caption         =   "<"
+      Enabled         =   0   'False
+      Height          =   375
+      Left            =   5640
+      TabIndex        =   27
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnAvançar 
+      Caption         =   ">"
+      Enabled         =   0   'False
+      Height          =   375
+      Left            =   6360
+      TabIndex        =   26
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnFinal 
+      Caption         =   ">>"
+      Enabled         =   0   'False
       Height          =   375
       Left            =   6720
+      TabIndex        =   25
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnPesquisarProduto 
+      Caption         =   "B"
+      Enabled         =   0   'False
+      Height          =   375
+      Left            =   6000
+      TabIndex        =   24
+      Top             =   0
+      Width           =   375
+   End
+   Begin VB.CommandButton btnGravar 
+      Caption         =   "G"
+      Height          =   375
+      Left            =   4560
       TabIndex        =   23
       Top             =   0
       Width           =   375
@@ -46,14 +100,14 @@ Begin VB.Form FrmCadastroProdutos
       Top             =   2160
       Width           =   1095
    End
-   Begin VB.CommandButton btnBuscarGrupo 
+   Begin VB.CommandButton btnPesquisarGrupo 
       Height          =   375
       Left            =   7080
       TabIndex        =   8
       Top             =   1440
       Width           =   615
    End
-   Begin VB.CommandButton btnBuscarMarca 
+   Begin VB.CommandButton btnPesquisarMarca 
       Height          =   375
       Left            =   3360
       TabIndex        =   5
@@ -385,19 +439,102 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim inclusao As Boolean
 Dim rsProdutos As New Recordset
 Dim rsMarca As New Recordset
 Dim rsGrupo As New Recordset
 Dim rsProdutosAberto As Boolean
+Dim sql As String
+Dim inclusao As Boolean
 
 Private Sub Form_Load()
     ' Centraliza o formulário MDI Child dentro do MDI Form
     Me.Left = (frmMDIPrincipal.ScaleWidth - Me.Width) \ 2
     Me.Top = (frmMDIPrincipal.ScaleHeight - Me.Height) \ 2
     
-    'Setar Tipo como Inclusão ao carregar Form
     inclusao = True
+    
+    'CHAMAR FUNÇÃO DE INCLUSAO
+    incluir
+    
+End Sub
+
+Private Sub btnAlterar_Click()
+    
+    inclusao = False
+    
+    btnPesquisarProduto.Enabled = True
+    btnNovo.Enabled = True
+    btnAvançar.Enabled = True
+    btnFinal.Enabled = True
+    btnAnterior.Enabled = True
+    btnInicio.Enabled = True
+    
+    alteracao
+        
+End Sub
+
+Private Sub btnNovo_Click()
+
+    inclusao = True
+        
+    btnPesquisarProduto.Enabled = False
+    btnNovo.Enabled = False
+    btnAvançar.Enabled = False
+    btnFinal.Enabled = False
+    btnAnterior.Enabled = False
+    btnInicio.Enabled = False
+    
+    limparCampos
+    
+    incluir
+    
+End Sub
+
+Private Sub btnInicio_Click()
+
+    rsProdutos.MoveFirst
+    preencherCampos
+
+End Sub
+
+Private Sub btnAnterior_Click()
+
+    If rsProdutos("Codigo") <> 0 Then
+        rsProdutos.MovePrevious
+        preencherCampos
+    End If
+
+End Sub
+
+Private Sub btnAvançar_Click()
+
+    rsProdutos.MoveNext
+    If rsProdutos.EOF = True Then
+        rsProdutos.MovePrevious
+    End If
+    preencherCampos
+
+End Sub
+
+Private Sub btnFinal_Click()
+
+    rsProdutos.MoveLast
+    preencherCampos
+
+End Sub
+
+Private Sub btnGravar_Click()
+    If gravarDados = True Then
+        limparCampos
+        incluir
+    End If
+End Sub
+
+Private Sub incluir()
+
+    If rsProdutosAberto = True Then
+        rsProdutos.Close
+    End If
     
     'Setar Próximo Código do Novo Produto
     rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
@@ -406,36 +543,39 @@ Private Sub Form_Load()
     rsProdutos.MoveLast
     txtCodProduto = rsProdutos("Codigo") + 1
     txtEstoque = 0
-    
-    rsProdutos.Close
-    rsProdutosAberto = False
-    
+
 End Sub
 
-Private Sub btnAlterar_Click()
+Private Sub alteracao()
 
-    inclusao = False
-        
-End Sub
-
-Private Sub btnGravar_Click()
-    If gravarDados = True Then
-        limparDados
-    Else
+    If rsProdutosAberto = True Then
         rsProdutos.Close
-        rsProdutosAberto = False
     End If
+    
+    sql = "SELECT Prod.Codigo, Prod.Nome, CodigoMarca, Marcas.Nome NomeMarca, " & _
+          "CodigoGrupo, Grupos.Nome NomeGrupo, PrecoEntrada, PrecoSaida, Estoque, Situacao, Observacoes " & _
+          "FROM Produtos Prod " & _
+          "LEFT JOIN Marcas on Prod.CodigoMarca = Marcas.Codigo " & _
+          "LEFT JOIN Grupos on Prod.CodigoGrupo = Grupos.Codigo "
+
+    rsProdutos.Open sql, ConexaoBD, adOpenDynamic, adLockOptimistic
+    rsProdutosAberto = True
+    
+    rsProdutos.MoveFirst
+    preencherCampos
+    
 End Sub
 
 'Gravar RecordSet
 Private Function gravarDados() As Boolean
 On Error GoTo Trataerro
 
-    ' Verifica se o Recordset está aberto antes de tentar abrir novamente
-    If Not rsProdutosAberto Then
-        rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
-        rsProdutosAberto = True
+    If rsProdutosAberto = True Then
+        rsProdutos.Close
     End If
+
+    rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
+    rsProdutosAberto = True
     
     If inclusao = True Then
         rsProdutos.AddNew
@@ -452,8 +592,6 @@ On Error GoTo Trataerro
     rsProdutos("Observacoes") = VazioToNull(txtObservacoes)
     rsProdutos.Update
     
-    rsProdutos.Close
-    rsProdutosAberto = False
     gravarDados = True
     
     Exit Function
@@ -465,22 +603,46 @@ Trataerro:
 End Function
 
 'Limpar dados dos txtBox
-Private Sub limparDados()
+Private Sub limparCampos()
     txtCodProduto = txtCodProduto + 1
     txtNomeProduto.Text = Empty
     cbmSituacao.Text = Empty
     txtCodMarca.Text = Empty
+    txtNomeMarca.Text = Empty
     txtCodGrupo.Text = Empty
+    txtNomeGrupo.Text = Empty
     txtPrecoEntrada.Text = Empty
     txtEstoque = 0
     txtPrecoSaida.Text = Empty
     txtObservacoes.Text = Empty
 End Sub
 
+Private Sub preencherCampos()
+
+    txtCodProduto = NullToVazio(rsProdutos("Codigo"))
+    txtNomeProduto = NullToVazio(rsProdutos("Nome"))
+    cbmSituacao = NullToVazio(rsProdutos("Situacao"))
+    txtCodMarca = NullToVazio(rsProdutos("CodigoMarca"))
+    txtNomeMarca = NullToVazio(rsProdutos("NomeMarca"))
+    txtCodGrupo = NullToVazio(rsProdutos("CodigoGrupo"))
+    txtNomeGrupo = NullToVazio(rsProdutos("NomeGrupo"))
+    
+    ' Formata o valor do banco para exibir com 2 casas decimais
+    txtPrecoEntrada = Format(rsProdutos("PrecoEntrada"), "#,##0.00")
+    txtPrecoSaida = Format(rsProdutos("PrecoSaida"), "#,##0.00")
+    
+    txtEstoque = NullToVazio(rsProdutos("Estoque"))
+    txtObservacoes = NullToVazio(rsProdutos("Observacoes"))
+
+End Sub
+
+
 'Busca Grupo Pelo Codigo
 Private Sub txtCodGrupo_LostFocus()
 
-    If txtCodGrupo <> "" And IsNumeric(txtCodGrupo) Then
+    If txtCodGrupo = "" Then
+        txtNomeGrupo = ""
+    ElseIf txtCodGrupo <> "" And IsNumeric(txtCodGrupo) Then
     
         rsGrupo.Open "SELECT * FROM Grupos WHERE Codigo = " & txtCodGrupo, ConexaoBD, adOpenForwardOnly, adLockOptimistic
         
@@ -498,7 +660,9 @@ End Sub
 'Busca Marca Pelo Codigo
 Private Sub txtCodMarca_LostFocus()
 
-    If txtCodMarca <> "" And IsNumeric(txtCodMarca) Then
+    If txtCodMarca = "" Then
+        txtNomeMarca = ""
+    ElseIf txtCodMarca <> "" And IsNumeric(txtCodMarca) Then
         
         rsMarca.Open "SELECT * FROM Marcas WHERE Codigo = " & txtCodMarca, ConexaoBD, adOpenForwardOnly, adLockOptimistic
         
@@ -518,26 +682,28 @@ Private Sub txtPrecoEntrada_Change()
     Dim valor As String
     Dim pos As Integer
     
-    'remove formatação prévia
-    valor = Replace(txtPrecoEntrada, ",", "")
-    valor = Replace(valor, ".", "")
+    ' Apenas aplique a formatação se o campo não estiver vazio
+    If txtPrecoEntrada <> "" Then
     
-    If IsNumeric(valor) Then
+        ' Remove formatação prévia
+        valor = Replace(txtPrecoEntrada, ",", "")
+        valor = Replace(valor, ".", "")
+    
+        If IsNumeric(valor) Then
+            ' Converte o valor para duas casas decimais
+            valor = Format(Val(valor) / 100, "#,##0.00")
+            
+            ' Preserva a posição do cursor
+            pos = Len(txtPrecoEntrada) - txtPrecoEntrada.SelStart
+            txtPrecoEntrada = valor
+            txtPrecoEntrada.SelStart = Len(txtPrecoEntrada) - pos
+        ElseIf valor <> "" Then
+            ' Caso digite um valor não numérico
+            MsgBox "Digite apenas números.", vbExclamation
+            txtPrecoEntrada = "0,00"
+        End If
         
-        'Convert o valor para duas casas decimais
-        valor = Format(Val(valor) / 100, "#,##0.00")
-        
-        'Preserva a posição do cursor
-        pos = Len(txtPrecoEntrada) - txtPrecoEntrada.SelStart
-        txtPrecoEntrada = valor
-        txtPrecoEntrada.SelStart = Len(txtPrecoEntrada) - pos
-        
-    ElseIf valor <> "" Then
-        'Caso Digite um valor não Numérico
-        MsgBox "Digite apenas números.", vbExclamation
-        txtPrecoEntrada = "0,00"
     End If
-
 End Sub
 
 'FORMATAÇÃO DE VALOR
@@ -545,29 +711,31 @@ Private Sub txtPrecoSaida_Change()
     Dim valor As String
     Dim pos As Integer
     
-    'remove formatação prévia
-    valor = Replace(txtPrecoSaida, ",", "")
-    valor = Replace(valor, ".", "")
+    If txtPrecoSaida <> "" Then
     
-    If IsNumeric(valor) Then
+        ' Remove formatação prévia
+        valor = Replace(txtPrecoSaida, ",", "")
+        valor = Replace(valor, ".", "")
+    
+        If IsNumeric(valor) Then
+            ' Converte o valor para duas casas decimais
+            valor = Format(Val(valor) / 100, "#,##0.00")
+            
+            ' Preserva a posição do cursor
+            pos = Len(txtPrecoSaida) - txtPrecoSaida.SelStart
+            txtPrecoSaida = valor
+            txtPrecoSaida.SelStart = Len(txtPrecoSaida) - pos
+        ElseIf valor <> "" Then
+            ' Caso digite um valor não numérico
+            MsgBox "Digite apenas números.", vbExclamation
+            txtPrecoSaida = "0,00"
+        End If
         
-        'Convert o valor para duas casas decimais
-        valor = Format(Val(valor) / 100, "#,##0.00")
-        
-        'Preserva a posição do cursor
-        pos = Len(txtPrecoSaida) - txtPrecoSaida.SelStart
-        txtPrecoSaida = valor
-        txtPrecoSaida.SelStart = Len(txtPrecoSaida) - pos
-        
-    ElseIf valor <> "" Then
-        'Caso Digite um valor não Numérico
-        MsgBox "Digite apenas números.", vbExclamation
-        txtPrecoSaida = "0,00"
     End If
-
 End Sub
 
-Private Sub btnBuscarMarca_Click()
+'Pesquisar Marca
+Private Sub btnPesquisarMarca_Click()
 
     frmPesquisar.TabelaBD = "Marcas"
     frmPesquisar.ColunaBD = "Nome"
@@ -578,7 +746,8 @@ Private Sub btnBuscarMarca_Click()
 
 End Sub
 
-Private Sub btnBuscarGrupo_Click()
+'Pesquisar Grupo
+Private Sub btnPesquisarGrupo_Click()
 
     frmPesquisar.TabelaBD = "Grupos"
     frmPesquisar.ColunaBD = "Nome"
@@ -588,3 +757,4 @@ Private Sub btnBuscarGrupo_Click()
     frmPesquisar.Show
 
 End Sub
+

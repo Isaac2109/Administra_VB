@@ -121,7 +121,6 @@ Begin VB.Form frmPesquisar
       SplitCount      =   1
       BeginProperty Split0 
          AllowRowSizing  =   0   'False
-         AllowSizing     =   -1  'True
          RecordSelectors =   0   'False
          BeginProperty Column00 
             ColumnWidth     =   764,787
@@ -213,11 +212,15 @@ Private Sub dtgridPesquisa_DblClick()
     If Form = "CadastroProdutos" Then
     
         If PreencherCampo = "Grupo" Then
+        
             FrmCadastroProdutos.txtCodGrupo = dtgridPesquisa.Columns(0)
             FrmCadastroProdutos.txtNomeGrupo = dtgridPesquisa.Columns(1)
+            
         ElseIf PreencherCampo = "Marca" Then
+        
             FrmCadastroProdutos.txtCodMarca = dtgridPesquisa.Columns(0)
             FrmCadastroProdutos.txtNomeMarca = dtgridPesquisa.Columns(1)
+            
         End If
     
     End If

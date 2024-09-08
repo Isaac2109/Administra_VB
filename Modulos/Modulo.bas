@@ -33,6 +33,7 @@ Trataerro:
     
 End Function
 
+'TRANSFORMA CAMPOS VAZIOS EM NULL PARA GRAVAR NO BANCO DE DADOS
 Public Function VazioToNull(ByVal value As String) As Variant
 
     If value = "" Then
@@ -43,6 +44,14 @@ Public Function VazioToNull(ByVal value As String) As Variant
 
 End Function
 
+'TRANSFORMA DADOS VINDOS DO BANCO COM VALOR NULL PARA VAZIO "" PARA PREENCHER TXTBOX
+Public Function NullToVazio(ByVal value As Variant) As String
+    If IsNull(value) Then
+        NullToVazio = ""
+    Else
+        NullToVazio = value
+    End If
+End Function
 
 
 
