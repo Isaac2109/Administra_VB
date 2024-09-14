@@ -476,16 +476,8 @@ End Sub
 Private Sub btnNovo_Click()
 
     inclusao = True
-        
-    btnPesquisarProduto.Enabled = False
-    btnNovo.Enabled = False
-    btnAvançar.Enabled = False
-    btnFinal.Enabled = False
-    btnAnterior.Enabled = False
-    btnInicio.Enabled = False
     
     limparCampos
-    
     incluir
     
 End Sub
@@ -525,12 +517,22 @@ End Sub
 
 Private Sub btnGravar_Click()
     If gravarDados = True Then
+        inclusao = True
+        
         limparCampos
         incluir
     End If
 End Sub
 
 Private Sub incluir()
+
+    'DESATIVAR BOTÕES DE ALTERAÇÃO
+    btnPesquisarProduto.Enabled = False
+    btnNovo.Enabled = False
+    btnAvançar.Enabled = False
+    btnFinal.Enabled = False
+    btnAnterior.Enabled = False
+    btnInicio.Enabled = False
 
     If rsProdutosAberto = True Then
         rsProdutos.Close
@@ -540,8 +542,13 @@ Private Sub incluir()
     rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
     rsProdutosAberto = True
     
-    rsProdutos.MoveLast
-    txtCodProduto = rsProdutos("Codigo") + 1
+    If rsProdutos.EOF = True Then
+        txtCodProduto = 0
+    Else
+        rsProdutos.MoveLast
+        txtCodProduto = rsProdutos("Codigo") + 1
+    End If
+        
     txtEstoque = 0
 
 End Sub
@@ -561,6 +568,10 @@ Private Sub alteracao()
     rsProdutos.Open sql, ConexaoBD, adOpenDynamic, adLockOptimistic
     rsProdutosAberto = True
     
+    If rsProdutos.EOF = True Then
+        incluir
+        Exit Sub
+    End If
     rsProdutos.MoveFirst
     preencherCampos
     
@@ -573,12 +584,13 @@ On Error GoTo Trataerro
     If rsProdutosAberto = True Then
         rsProdutos.Close
     End If
-
-    rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
-    rsProdutosAberto = True
     
     If inclusao = True Then
+        rsProdutos.Open "SELECT * FROM Produtos", ConexaoBD, adOpenDynamic, adLockOptimistic
+        rsProdutosAberto = True
         rsProdutos.AddNew
+    Else
+        rsProdutos.Open "SELECT * FROM Produtos WHERE Codigo = " & txtCodProduto, ConexaoBD, adOpenDynamic, adLockOptimistic
     End If
     
     rsProdutos("Codigo") = VazioToNull(txtCodProduto)
@@ -603,8 +615,7 @@ Trataerro:
 End Function
 
 'Limpar dados dos txtBox
-Private Sub limparCampos()
-    txtCodProduto = txtCodProduto + 1
+Public Sub limparCampos()
     txtNomeProduto.Text = Empty
     cbmSituacao.Text = Empty
     txtCodMarca.Text = Empty
@@ -638,7 +649,7 @@ End Sub
 
 
 'Busca Grupo Pelo Codigo
-Private Sub txtCodGrupo_LostFocus()
+Public Sub txtCodGrupo_LostFocus()
 
     If txtCodGrupo = "" Then
         txtNomeGrupo = ""
@@ -658,7 +669,7 @@ Private Sub txtCodGrupo_LostFocus()
 End Sub
 
 'Busca Marca Pelo Codigo
-Private Sub txtCodMarca_LostFocus()
+Public Sub txtCodMarca_LostFocus()
 
     If txtCodMarca = "" Then
         txtNomeMarca = ""
@@ -734,13 +745,22 @@ Private Sub txtPrecoSaida_Change()
     End If
 End Sub
 
+Private Sub btnPesquisarProduto_Click()
+ 
+    frmPesquisar.TabelaBD = "Produtos"
+    frmPesquisar.ColunaBD = "Nome"
+    frmPesquisar.Form = "CadastroProdutos"
+    
+    frmPesquisar.Show
+ 
+End Sub
+
 'Pesquisar Marca
 Private Sub btnPesquisarMarca_Click()
 
     frmPesquisar.TabelaBD = "Marcas"
     frmPesquisar.ColunaBD = "Nome"
     frmPesquisar.Form = "CadastroProdutos"
-    frmPesquisar.PreencherCampo = "Marca"
     
     frmPesquisar.Show
 
@@ -752,7 +772,6 @@ Private Sub btnPesquisarGrupo_Click()
     frmPesquisar.TabelaBD = "Grupos"
     frmPesquisar.ColunaBD = "Nome"
     frmPesquisar.Form = "CadastroProdutos"
-    frmPesquisar.PreencherCampo = "Grupo"
     
     frmPesquisar.Show
 

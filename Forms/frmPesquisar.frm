@@ -123,9 +123,13 @@ Begin VB.Form frmPesquisar
          AllowRowSizing  =   0   'False
          RecordSelectors =   0   'False
          BeginProperty Column00 
+            Locked          =   -1  'True
+            WrapText        =   -1  'True
             ColumnWidth     =   764,787
          EndProperty
          BeginProperty Column01 
+            Locked          =   -1  'True
+            WrapText        =   -1  'True
             ColumnWidth     =   6075,213
          EndProperty
       EndProperty
@@ -185,7 +189,7 @@ Private Sub btnPesquisar_Click()
 
     Dim sql As String
     
-    sql = "SELECT Codigo, Nome " & _
+    sql = "SELECT * " & _
             "FROM " & TabelaBD & _
             " WHERE " & ColunaBD & " LIKE '%" & txtPesquisa & "%'"
 
@@ -211,15 +215,35 @@ Private Sub dtgridPesquisa_DblClick()
 
     If Form = "CadastroProdutos" Then
     
-        If PreencherCampo = "Grupo" Then
+        If TabelaBD = "Grupos" Then
         
-            FrmCadastroProdutos.txtCodGrupo = dtgridPesquisa.Columns(0)
-            FrmCadastroProdutos.txtNomeGrupo = dtgridPesquisa.Columns(1)
+            FrmCadastroProdutos.txtCodGrupo = adoPesquisa.Recordset("Codigo")
+            FrmCadastroProdutos.txtNomeGrupo = adoPesquisa.Recordset("Nome")
             
-        ElseIf PreencherCampo = "Marca" Then
+        ElseIf TabelaBD = "Marcas" Then
         
-            FrmCadastroProdutos.txtCodMarca = dtgridPesquisa.Columns(0)
-            FrmCadastroProdutos.txtNomeMarca = dtgridPesquisa.Columns(1)
+            FrmCadastroProdutos.txtCodMarca = adoPesquisa.Recordset("Codigo")
+            FrmCadastroProdutos.txtNomeMarca = adoPesquisa.Recordset("Codigo")
+            
+        ElseIf TabelaBD = "Produtos" Then
+        
+            FrmCadastroProdutos.limparCampos
+            FrmCadastroProdutos.txtCodProduto = NullToVazio(adoPesquisa.Recordset("Codigo"))
+            FrmCadastroProdutos.txtNomeProduto = NullToVazio(adoPesquisa.Recordset("Nome"))
+            FrmCadastroProdutos.cbmSituacao = NullToVazio(adoPesquisa.Recordset("Situacao"))
+            
+            FrmCadastroProdutos.txtCodMarca = NullToVazio(adoPesquisa.Recordset("CodigoMarca"))
+            FrmCadastroProdutos.txtCodMarca_LostFocus
+            
+            FrmCadastroProdutos.txtCodGrupo = NullToVazio(adoPesquisa.Recordset("CodigoGrupo"))
+            FrmCadastroProdutos.txtCodGrupo_LostFocus
+            
+            ' Formata o valor do banco para exibir com 2 casas decimais
+            FrmCadastroProdutos.txtPrecoEntrada = Format(adoPesquisa.Recordset("PrecoEntrada"), "#,##0.00")
+            FrmCadastroProdutos.txtPrecoSaida = Format(adoPesquisa.Recordset("PrecoSaida"), "#,##0.00")
+            
+            FrmCadastroProdutos.txtEstoque = NullToVazio(adoPesquisa.Recordset("Estoque"))
+            FrmCadastroProdutos.txtObservacoes = NullToVazio(adoPesquisa.Recordset("Observacoes"))
             
         End If
     
