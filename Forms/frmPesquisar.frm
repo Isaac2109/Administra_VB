@@ -247,6 +247,21 @@ Private Sub dtgridPesquisa_DblClick()
             
         End If
     
+    ElseIf Form = "CadastroClientes" Then
+    
+        frmCadastroClientes.limparCampos
+        frmCadastroClientes.txtCodCliente = NullToVazio(adoPesquisa.Recordset("Codigo"))
+        frmCadastroClientes.txtNomeCliente = NullToVazio(adoPesquisa.Recordset("Nome"))
+        frmCadastroClientes.cbmPessoa = NullToVazio(adoPesquisa.Recordset("Pessoa"))
+        frmCadastroClientes.txtCPF_CNPJ = NullToVazio(adoPesquisa.Recordset("CPF_CNPJ"))
+        frmCadastroClientes.txtTelefone = NullToVazio(adoPesquisa.Recordset("Telefone"))
+        frmCadastroClientes.txtNascimento = NullToVazio(adoPesquisa.Recordset("DataDeNascimento"))
+        frmCadastroClientes.txtEmail = NullToVazio(adoPesquisa.Recordset("Email"))
+        frmCadastroClientes.txtCEP = NullToVazio(adoPesquisa.Recordset("CEP"))
+        frmCadastroClientes.txtEndereco = NullToVazio(adoPesquisa.Recordset("Endereco"))
+        frmCadastroClientes.txtCidade = NullToVazio(adoPesquisa.Recordset("Cidade"))
+        frmCadastroClientes.txtEstado = NullToVazio(adoPesquisa.Recordset("Estado"))
+        
     End If
     
     Unload Me

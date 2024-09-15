@@ -16,7 +16,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   "N"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   4920
+      Left            =   5160
       TabIndex        =   29
       Top             =   0
       Width           =   375
@@ -25,7 +25,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   "<<"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   5280
+      Left            =   5520
       TabIndex        =   28
       Top             =   0
       Width           =   375
@@ -34,7 +34,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   "<"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   5640
+      Left            =   5880
       TabIndex        =   27
       Top             =   0
       Width           =   375
@@ -43,7 +43,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   ">"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   6360
+      Left            =   6600
       TabIndex        =   26
       Top             =   0
       Width           =   375
@@ -52,7 +52,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   ">>"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   6720
+      Left            =   6960
       TabIndex        =   25
       Top             =   0
       Width           =   375
@@ -61,7 +61,7 @@ Begin VB.Form FrmCadastroProdutos
       Caption         =   "B"
       Enabled         =   0   'False
       Height          =   375
-      Left            =   6000
+      Left            =   6240
       TabIndex        =   24
       Top             =   0
       Width           =   375
@@ -69,7 +69,7 @@ Begin VB.Form FrmCadastroProdutos
    Begin VB.CommandButton btnGravar 
       Caption         =   "G"
       Height          =   375
-      Left            =   4560
+      Left            =   4800
       TabIndex        =   23
       Top             =   0
       Width           =   375
@@ -77,7 +77,7 @@ Begin VB.Form FrmCadastroProdutos
    Begin VB.CommandButton btnAlterar 
       Caption         =   "X"
       Height          =   375
-      Left            =   7080
+      Left            =   7320
       TabIndex        =   22
       Top             =   0
       Width           =   375
@@ -101,18 +101,20 @@ Begin VB.Form FrmCadastroProdutos
       Width           =   1095
    End
    Begin VB.CommandButton btnPesquisarGrupo 
+      Caption         =   "B"
       Height          =   375
-      Left            =   7080
+      Left            =   7200
       TabIndex        =   8
       Top             =   1440
-      Width           =   615
+      Width           =   495
    End
    Begin VB.CommandButton btnPesquisarMarca 
+      Caption         =   "B"
       Height          =   375
-      Left            =   3360
+      Left            =   3480
       TabIndex        =   5
       Top             =   1440
-      Width           =   615
+      Width           =   495
    End
    Begin VB.ComboBox cbmSituacao 
       BeginProperty Font 
@@ -196,7 +198,7 @@ Begin VB.Form FrmCadastroProdutos
       Left            =   4800
       TabIndex        =   7
       Top             =   1440
-      Width           =   2295
+      Width           =   2415
    End
    Begin VB.TextBox txtCodGrupo 
       BeginProperty Font 
@@ -228,7 +230,7 @@ Begin VB.Form FrmCadastroProdutos
       Left            =   960
       TabIndex        =   4
       Top             =   1440
-      Width           =   2415
+      Width           =   2535
    End
    Begin VB.TextBox txtCodMarca 
       BeginProperty Font 
